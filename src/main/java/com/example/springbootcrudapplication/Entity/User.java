@@ -16,7 +16,7 @@ public class User {
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
-    @Schema(description = "Name of the user", example = "foo@bar.eu")
+    @Schema(description = "Name of the user", example = "Foobar")
     String name;
 
     @Schema(description = "Email of the user", example = "foo@bar.eu")
