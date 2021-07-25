@@ -27,6 +27,10 @@ public class UserService {
             user.setEmail(updatedUser.getEmail());
         }
 
+        if (null != updatedUser.getFirstName()) {
+            user.setFirstName(updatedUser.getFirstName());
+        }
+
         userRepository.save(user);
         return user;
     }
@@ -42,5 +46,9 @@ public class UserService {
 
     public void delete(long id) {
         userRepository.deleteById(id);
+    }
+
+    public Iterable<User> indexFilterFirstName(String firstName) {
+        return userRepository.findAllByFirstName(firstName);
     }
 }
