@@ -5,8 +5,6 @@ import com.example.springbootcrudapplication.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class UserService {
 
@@ -17,7 +15,19 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User update(User user) {
+    public User update(User updatedUser, long id) throws Exception {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new Exception("User not found with id " + id));
+
+        if (null != updatedUser.getName()) {
+            user.setName(updatedUser.getName());
+        }
+
+        if (null != updatedUser.getEmail()) {
+            user.setEmail(updatedUser.getEmail());
+        }
+
+        userRepository.save(user);
         return user;
     }
 
@@ -25,8 +35,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public Optional<User> show(long id) {
-        return userRepository.findById(id);
+    public User show(long id) throws Exception {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new Exception("User not found with id " + id));
     }
 
     public void delete(long id) {

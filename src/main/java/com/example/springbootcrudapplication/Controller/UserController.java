@@ -22,8 +22,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> showUser(@PathVariable(value = "id") long id) throws Exception {
-        User user = userService.show(id)
-                .orElseThrow(() -> new Exception("User not found with id" + id));
+        User user = userService.show(id);
         return ResponseEntity.ok().body(user);
     }
 
@@ -32,9 +31,9 @@ public class UserController {
         return ResponseEntity.ok().body(userService.create(user));
     }
 
-    @PutMapping
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-        return ResponseEntity.ok().body(userService.update(user));
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable(value = "id") long id, @RequestBody User user) throws Exception {
+        return ResponseEntity.ok().body(userService.update(user, id));
     }
 
     @DeleteMapping("/{id}")
