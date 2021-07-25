@@ -1,5 +1,6 @@
 package com.example.springbootcrudapplication.Entity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -12,9 +13,12 @@ import javax.persistence.Id;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private Long id;
 
+    @Schema(description = "Name of the user", example = "foo@bar.eu")
     String name;
 
+    @Schema(description = "Email of the user", example = "foo@bar.eu")
     String email;
 }
