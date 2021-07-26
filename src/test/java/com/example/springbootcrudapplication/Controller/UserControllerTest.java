@@ -3,12 +3,11 @@ package com.example.springbootcrudapplication.Controller;
 import com.example.springbootcrudapplication.Entity.User;
 import com.example.springbootcrudapplication.Service.UserService;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springdoc.api.OpenApiResourceNotFoundException;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@ExtendWith(SpringExtension.class)
+@SpringBootTest
 class UserControllerTest {
 
     @Mock
