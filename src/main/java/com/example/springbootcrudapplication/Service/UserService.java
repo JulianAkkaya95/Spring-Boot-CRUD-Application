@@ -16,7 +16,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User update(User updatedUser, long id) throws Exception {
+    public User update(User updatedUser, long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new OpenApiResourceNotFoundException("User not found with id " + id));
 
@@ -38,7 +38,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User show(long id) throws Exception {
+    public User show(long id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new OpenApiResourceNotFoundException("User not found with id " + id));
     }
