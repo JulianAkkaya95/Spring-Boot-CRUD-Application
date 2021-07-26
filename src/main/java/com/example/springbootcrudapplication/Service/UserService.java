@@ -2,6 +2,7 @@ package com.example.springbootcrudapplication.Service;
 
 import com.example.springbootcrudapplication.Entity.User;
 import com.example.springbootcrudapplication.Repository.UserRepository;
+import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +18,14 @@ public class UserService {
 
     public User update(User updatedUser, long id) throws Exception {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new Exception("User not found with id " + id));
+                .orElseThrow(() -> new OpenApiResourceNotFoundException("User not found with id " + id));
 
         if (null != updatedUser.getName()) {
             user.setName(updatedUser.getName());
         }
-
         if (null != updatedUser.getEmail()) {
             user.setEmail(updatedUser.getEmail());
         }
-
         if (null != updatedUser.getFirstName()) {
             user.setFirstName(updatedUser.getFirstName());
         }
@@ -41,7 +40,7 @@ public class UserService {
 
     public User show(long id) throws Exception {
         return userRepository.findById(id)
-                .orElseThrow(() -> new Exception("User not found with id " + id));
+                .orElseThrow(() -> new OpenApiResourceNotFoundException("User not found with id " + id));
     }
 
     public void delete(long id) {
