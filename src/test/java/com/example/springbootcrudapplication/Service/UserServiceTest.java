@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 import java.util.Optional;
@@ -107,9 +108,18 @@ class UserServiceTest {
 
     @Test
     void delete() {
+        when(userRepository.findById(anyLong())).thenReturn(Optional.of(mock(User.class)));
+
         userService.delete(anyLong());
 
         verify(userRepository).deleteById(anyLong());
+    }
+
+    @Test
+    void deleteUserNotFound() {
+        when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+        assertThrows(OpenApiResourceNotFoundException.class , () -> userService.delete(anyLong()));
     }
 
     @Test
