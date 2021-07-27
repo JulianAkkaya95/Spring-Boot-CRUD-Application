@@ -1,7 +1,7 @@
 Feature: User
 
     Background:
-        Given url "http://localhost:8000/users"
+        Given url "http://localhost:7000/users"
 
     Scenario: Index user
         Given path "/1"
