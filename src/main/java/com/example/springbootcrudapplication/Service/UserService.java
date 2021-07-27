@@ -5,6 +5,7 @@ import com.example.springbootcrudapplication.Repository.UserRepository;
 import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.SmartValidator;
 
 @Service
 public class UserService {
@@ -20,15 +21,7 @@ public class UserService {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new OpenApiResourceNotFoundException("User not found with id " + id));
 
-        if (null != updatedUser.getName()) {
-            user.setName(updatedUser.getName());
-        }
-        if (null != updatedUser.getEmail()) {
-            user.setEmail(updatedUser.getEmail());
-        }
-        if (null != updatedUser.getFirstName()) {
-            user.setFirstName(updatedUser.getFirstName());
-        }
+        mapUserToUser(updatedUser, user);
 
         userRepository.save(user);
         return user;
@@ -50,5 +43,18 @@ public class UserService {
 
     public Iterable<User> indexFilterFirstName(String firstName) {
         return userRepository.findAllByFirstName(firstName);
+    }
+
+    //If the project grows this mapping could be replaced with mapstruct
+    private void mapUserToUser(User updatedUser, User user) {
+        if (null != updatedUser.getName()) {
+            user.setName(updatedUser.getName());
+        }
+        if (null != updatedUser.getEmail()) {
+            user.setEmail(updatedUser.getEmail());
+        }
+        if (null != updatedUser.getFirstName()) {
+            user.setFirstName(updatedUser.getFirstName());
+        }
     }
 }
