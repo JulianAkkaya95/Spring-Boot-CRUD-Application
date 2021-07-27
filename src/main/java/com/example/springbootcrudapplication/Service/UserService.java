@@ -5,7 +5,6 @@ import com.example.springbootcrudapplication.Repository.UserRepository;
 import org.springdoc.api.OpenApiResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.SmartValidator;
 
 @Service
 public class UserService {

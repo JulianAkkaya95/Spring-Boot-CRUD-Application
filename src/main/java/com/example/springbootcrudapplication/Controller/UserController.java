@@ -18,7 +18,7 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Iterable<User>> indexUsers(@RequestParam(value = "firstName", required = false) String firstName) {
-        return ResponseEntity.ok().body( null == firstName ?  userService.index() : userService.indexFilterFirstName(firstName));
+        return ResponseEntity.ok().body(null == firstName ? userService.index() : userService.indexFilterFirstName(firstName));
     }
 
     @GetMapping("/{id}")
