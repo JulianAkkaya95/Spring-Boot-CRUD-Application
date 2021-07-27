@@ -44,6 +44,7 @@ public class UserService {
     }
 
     public void delete(long id) {
+        show(id);
         userRepository.deleteById(id);
     }
 
